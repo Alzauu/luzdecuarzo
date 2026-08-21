@@ -49,13 +49,3 @@ static/
 └── logo.jpg                 → logo de Luz de Cuarzo
 ```
 
-## Pendientes para dejarlo 100% listo
-
-1. **Mapa de Google:** abre `src/lib/components/MapSection.svelte` y reemplaza el valor de `mapaSrc` por el `src` real que te entrega Google Maps:
-   - Busca tu dirección en Google Maps
-   - Clic en **Compartir → Insertar un mapa**
-   - Copia el link que aparece dentro de `src="..."` y pégalo en `mapaSrc`
-
-2. **Imágenes reales:** en `Hero.svelte`, cada `.carousel-item` tiene un ícono de placeholder. Reemplázalo por `<img src="/tu-foto.jpg" alt="..." class="h-64 w-full object-cover md:h-80" />` cuando tengas las fotos reales (colócalas en la carpeta `static/`).
-
-3. **WhatsApp y correo:** en `Reservas.svelte`, actualiza el número de WhatsApp y el correo de contacto con los datos reales del centro.
