@@ -24,7 +24,7 @@
 	let nombre = $state('');
 	let correo = $state('');
 	let telefono = $state('');
-	let servicioId = $state(data.servicios[0]?.id ?? '');
+	let servicioId = $state('');
 	let fecha = $state('');
 	let hora = $state('10:00');
 	let estado = $state('pagado');
