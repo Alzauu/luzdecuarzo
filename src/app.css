@@ -1,0 +1,134 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html,
+body {
+  background-color: #f7f7f4;
+  overflow-x: clip;
+  max-width: 100vw;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Transición de página con desenfoque, usando la View Transitions API nativa. */
+::view-transition-old(root) {
+  animation: 250ms ease-out both desvanecer-difuminar;
+}
+::view-transition-new(root) {
+  animation: 400ms ease-in both aparecer-nitido;
+}
+
+@keyframes desvanecer-difuminar {
+  from {
+    opacity: 1;
+    filter: blur(0);
+  }
+  to {
+    opacity: 0;
+    filter: blur(8px);
+  }
+}
+
+@keyframes aparecer-nitido {
+  from {
+    opacity: 0;
+    filter: blur(12px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+.carousel {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.carousel::-webkit-scrollbar {
+  display: none;
+}
+
+/* Animación de aparición al hacer scroll (ver src/lib/actions/reveal.ts) */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+  will-change: opacity, transform;
+}
+
+[data-reveal].in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Animación de entrada del Hero (fade-in + slide-up al cargar la página) */
+@keyframes hero-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-fade-in {
+  opacity: 0;
+  animation: hero-fade-up 0.7s ease forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .hero-fade-in {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Textura sutil de ondas (evoca el agua de las tinajas/jacuzzi) aplicada
+   sobre el color de fondo de cada sección mediante las clases utilitarias
+   .bg-texture (secciones claras) y .bg-texture-dark (secciones oscuras). */
+.bg-texture {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='40' viewBox='0 0 120 40'%3E%3Cpath d='M0 20 Q15 5 30 20 T60 20 T90 20 T120 20' fill='none' stroke='%238FA491' stroke-width='1' opacity='0.08'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
+
+.bg-texture-dark {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='40' viewBox='0 0 120 40'%3E%3Cpath d='M0 20 Q15 5 30 20 T60 20 T90 20 T120 20' fill='none' stroke='%23F7F7F4' stroke-width='1' opacity='0.07'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
+
+/* Reservas combina degradado + textura: ambas capas van en la misma
+   propiedad background-image (no se pueden usar dos clases separadas
+   que definan background-image, la segunda pisaría a la primera). */
+.bg-reservas-texture {
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='40' viewBox='0 0 120 40'%3E%3Cpath d='M0 20 Q15 5 30 20 T60 20 T90 20 T120 20' fill='none' stroke='%23F7F7F4' stroke-width='1' opacity='0.08'/%3E%3C/svg%3E"),
+    linear-gradient(to bottom right, #8fa491, #4a5a4c);
+  background-repeat: repeat, no-repeat;
+}
+
+.bg-madera-texture {
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Cpath d='M0 24 Q35 10 70 24 T140 24' fill='none' stroke='%238A8A82' stroke-width='1' opacity='0.18'/%3E%3Cpath d='M0 74 Q35 60 70 74 T140 74' fill='none' stroke='%238A8A82' stroke-width='1' opacity='0.14'/%3E%3Cpath d='M0 112 Q35 98 70 112 T140 112' fill='none' stroke='%238A8A82' stroke-width='1' opacity='0.12'/%3E%3C/svg%3E"),
+    linear-gradient(to bottom right, #E7E5DD, #D6D9D4);
+  background-repeat: repeat, no-repeat;
+  background-attachment: fixed;
+}
